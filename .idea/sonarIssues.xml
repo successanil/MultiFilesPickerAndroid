@@ -78,6 +78,46 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/filespickerlib/filepicker/FilePickerConstants.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/filespickerlib/filepicker/ImageDataFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/filespickerlib/filepicker/ImageFolderFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/filespickerlib/filepicker/ImageFolderListRecyclerViewAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/filespickerlib/filepicker/ParentMethodsCaller.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/filespickerlib/filepicker/SpecificFolderImageFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/filespickerlib/filepicker/SpecificFolderListRecyclerViewAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="/a.dummy">
           <value>
             <set />

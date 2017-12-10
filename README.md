@@ -2,15 +2,11 @@
 MultiFilesPickerForAndroid , right now lib supports only picking up images but soon support for other types of files will be added. 
 
 
-![CircleImageView](https://raw.github.com/hdodenhof/CircleImageView/master/screenshot.png)
 
-It uses a BitmapShader and **does not**:
-* create a copy of the original bitmap
-* use a clipPath (which is neither hardware accelerated nor anti-aliased)
-* use setXfermode to clip the bitmap (which means drawing twice to the canvas)
 
-As this is just a custom ImageView and not a custom Drawable or a combination of both, it can be used with all kinds of drawables, i.e. a PicassoDrawable from [Picasso](https://github.com/square/picasso) or other non-standard drawables (needs some testing though).
 
+Usage
+========
 
 
 

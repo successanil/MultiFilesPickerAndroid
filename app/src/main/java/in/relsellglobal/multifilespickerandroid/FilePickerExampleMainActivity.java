@@ -18,11 +18,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.relsellglobal.multifilespickerandroid.filepicker.ImageFolderFragment;
-import in.relsellglobal.multifilespickerandroid.filepicker.ParentMethodsCaller;
-import in.relsellglobal.multifilespickerandroid.filepicker.SpecificFolderImageFragment;
+import in.relsellglobal.picker.ImageFolderFragment;
+import in.relsellglobal.picker.ParentMethodsCaller;
+import in.relsellglobal.picker.SpecificFolderImageFragment;
 
-import static in.relsellglobal.multifilespickerandroid.filepicker.FilePickerConstants.permissionConsts.REQUEST_CODE_ASK_PERMISSIONS;
+import static in.relsellglobal.picker.FilePickerConstants.permissionConsts.REQUEST_CODE_ASK_PERMISSIONS;
+
 
 public class FilePickerExampleMainActivity extends AppCompatActivity implements ParentMethodsCaller {
 

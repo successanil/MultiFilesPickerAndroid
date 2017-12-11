@@ -2,9 +2,17 @@
  * Copyright (c) 2017. Relsell Global
  */
 
+/*
+ * Copyright (c) 2017. Relsell Global
+ */
+
+/*
+ * Copyright (c) 2017. Relsell Global
+ */
 
 
-package in.relsellglobal.multifilespickerandroid.filepicker;
+
+package in.relsellglobal.picker;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -27,17 +35,13 @@ import android.widget.CursorAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.relsellglobal.multifilespickerandroid.FilePickerExampleMainActivity;
-import in.relsellglobal.multifilespickerandroid.R;
-
-
 
 public class ImageFolderFragment extends DialogFragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     RecyclerView mList;
     ImageFolderListRecyclerViewAdapter mImageFolderCursorListAdapter;
     private static ImageFolderFragment sImageFolderfragment;
-    private String TAG=ImageFolderFragment.class.getSimpleName();
+    private String TAG= ImageFolderFragment.class.getSimpleName();
     private ParentMethodsCaller parentMethodsCaller;
     List<ImageDataFromCursor> list = new ArrayList();
     int containerId;
@@ -208,8 +212,8 @@ public class ImageFolderFragment extends DialogFragment implements LoaderManager
         this.containerId = id;
     }
 
-    public void setParentCaller(FilePickerExampleMainActivity filePickerExampleMainActivity) {
-        this.parentMethodsCaller = filePickerExampleMainActivity;
+    public void setParentCaller(ParentMethodsCaller caller) {
+        this.parentMethodsCaller = caller;
     }
 
 

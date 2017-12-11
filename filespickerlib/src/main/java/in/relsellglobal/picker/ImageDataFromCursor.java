@@ -10,7 +10,15 @@
  * Copyright (c) 2017. Relsell Global
  */
 
-package in.relsellglobal.multifilespickerandroid.filepicker;
+/*
+ * Copyright (c) 2017. Relsell Global
+ */
+
+/*
+ * Copyright (c) 2017. Relsell Global
+ */
+
+package in.relsellglobal.picker;
 
 /**
  * Created by anilkukreti on 17/11/17.

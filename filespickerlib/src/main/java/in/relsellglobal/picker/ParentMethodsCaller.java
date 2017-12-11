@@ -10,7 +10,11 @@
  * Copyright (c) 2017. Relsell Global
  */
 
-package in.relsellglobal.filespickerlib.filepicker;
+/*
+ * Copyright (c) 2017. Relsell Global
+ */
+
+package in.relsellglobal.picker;
 
 import android.os.Bundle;
 

@@ -2,5 +2,5 @@
   ~ Copyright (c) 2017. Relsell Global
   -->
 
-<manifest package="in.relsellglobal.filespickerlib"
+<manifest package="in.relsellglobal.picker"
           xmlns:android="http://schemas.android.com/apk/res/android"/>

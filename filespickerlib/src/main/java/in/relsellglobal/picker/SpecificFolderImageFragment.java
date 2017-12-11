@@ -14,7 +14,11 @@
  * Copyright (c) 2017. Relsell Global
  */
 
-package in.relsellglobal.filespickerlib.filepicker;
+/*
+ * Copyright (c) 2017. Relsell Global
+ */
+
+package in.relsellglobal.picker;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -39,8 +43,6 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import in.relsellglobal.filespickerlib.R;
 
 
 /**

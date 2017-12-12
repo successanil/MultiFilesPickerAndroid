@@ -228,6 +228,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/res/layout/specificfolderimages_listitem.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/local.properties">
           <value>
             <set />

@@ -44,6 +44,8 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.relsellglobal.picker.utils.Constants;
+
 
 /**
  * Created by anil on 11/7/15.
@@ -62,6 +64,7 @@ public class SpecificFolderImageFragment extends Fragment implements LoaderManag
     Button mOKbtn;
 
     Cursor mData;
+
 
 
     SpecificFolderListRecyclerViewAdapter mSpecificFolderImageCursorListAdapter;
@@ -122,7 +125,9 @@ public class SpecificFolderImageFragment extends Fragment implements LoaderManag
 
         setRetainInstance(true);
 
-        mSpecificFolderImageCursorListAdapter = new SpecificFolderListRecyclerViewAdapter(getActivity(), imageDataFromCursorArrayList);
+        int i = getArguments().getInt(Constants.BundleKeys.containerBGForInnerImageItems);
+
+        mSpecificFolderImageCursorListAdapter = new SpecificFolderListRecyclerViewAdapter(getActivity(), imageDataFromCursorArrayList,i);
 
         recyclerView.setAdapter(mSpecificFolderImageCursorListAdapter);
 

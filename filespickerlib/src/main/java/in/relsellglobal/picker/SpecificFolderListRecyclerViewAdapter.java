@@ -15,34 +15,39 @@
 package in.relsellglobal.picker;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.util.List;
+
+import in.relsellglobal.picker.utils.Utility;
 
 
 public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<SpecificFolderListRecyclerViewAdapter.ViewHolder> {
 
     private List<ImageDataFromCursor> imageDataFromCursorList;
     private Context context;
+    private int containerBG;
 
 
 
 
 
-    public SpecificFolderListRecyclerViewAdapter(Context context, List<ImageDataFromCursor> imageDataFromCursors) {
+    public SpecificFolderListRecyclerViewAdapter(Context context, List<ImageDataFromCursor> imageDataFromCursors,int containerbg) {
 
         this.imageDataFromCursorList = imageDataFromCursors;
         this.context = context;
+        this.containerBG = containerbg;
 
     }
 
@@ -62,8 +67,14 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
 
         File f = new File(imageDataFromCursor.getData());
 
+        holder.frameLayout.setBackground(context.getResources().getDrawable(containerBG));
 
-        Picasso.with(context).load(f).resize(200,200).centerCrop().into(holder.imageView);
+
+        try {
+            new ImageGetterFromFile(holder.imageView, imageDataFromCursor.getData()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } catch (Exception e) {
+
+        }
 
         //in some cases, it will prevent unwanted situations
         holder.mCb.setOnCheckedChangeListener(null);
@@ -96,14 +107,51 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
         public ImageView imageView;
         public TextView mBucketName;
         public CheckBox mCb;
+        public FrameLayout frameLayout;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             imageView = (ImageView) view.findViewById(R.id.imgView);
             mCb = (CheckBox)view.findViewById(R.id.cb);
+            frameLayout = (FrameLayout)view.findViewById(R.id.containerFM);
         }
 
 
     }
+
+    private class ImageGetterFromFile extends AsyncTask<Void, Void, Bitmap> {
+
+
+        private ImageView imageView;
+        private String uriPath;
+
+
+        public ImageGetterFromFile(ImageView imageView, String path) {
+            this.imageView = imageView;
+            this.uriPath = path;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+
+
+            Bitmap img = Utility.decodeSampledBitmapFromResource(uriPath, 350, 350);
+
+            return img;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+
+            imageView.setImageBitmap(bitmap);
+
+
+        }
+    }
+
+
+
+
 }

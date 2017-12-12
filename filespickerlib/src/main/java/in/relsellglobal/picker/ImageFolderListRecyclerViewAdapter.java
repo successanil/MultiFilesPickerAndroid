@@ -75,7 +75,7 @@ public class ImageFolderListRecyclerViewAdapter extends RecyclerView.Adapter<Ima
         });
     }
 
-    public class ImageGetterFromFile extends AsyncTask<Void, Void, Bitmap> {
+    private class ImageGetterFromFile extends AsyncTask<Void, Void, Bitmap> {
 
 
         private ImageView imageView;

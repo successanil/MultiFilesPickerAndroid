@@ -33,6 +33,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/build/generated/source/r/debug/in/relsellglobal/multifilespickerandroid/R.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/build/generated/source/r/debug/in/relsellglobal/picker/R.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <value>
             <set />
@@ -104,6 +114,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/filespickerlib/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/build/generated/source/r/debug/in/relsellglobal/picker/R.java">
           <value>
             <set />
           </value>
@@ -193,7 +208,37 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/utils/Constants.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/utils/Utility.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/res/drawable/common_bg_image_item.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/res/layout/images_folder_listitem.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/local.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/TripsNow/tripsapp/Trips/app/src/main/java/com/asxpartners/app/tripscore/activity/PasswordActivityForSettings.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/TripsNow/tripsapp/Trips/app/src/main/java/com/asxpartners/app/tripscore/misc/SettingsConfiguration.java">
           <value>
             <set />
           </value>

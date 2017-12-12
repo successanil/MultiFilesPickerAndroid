@@ -21,6 +21,7 @@ import java.util.List;
 import in.relsellglobal.picker.ImageFolderFragment;
 import in.relsellglobal.picker.ParentMethodsCaller;
 import in.relsellglobal.picker.SpecificFolderImageFragment;
+import in.relsellglobal.picker.utils.Constants;
 
 import static in.relsellglobal.picker.FilePickerConstants.permissionConsts.REQUEST_CODE_ASK_PERMISSIONS;
 
@@ -57,6 +58,9 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
         ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
         imageFolderFragment.setParentCaller(FilePickerExampleMainActivity.this);
         imageFolderFragment.setContainerId(containerLayout.getId());
+        Bundle b = new Bundle();
+        b.putInt(Constants.BundleKeys.resForThumbNailLayoutBG,R.drawable.ic_launcher_background);
+        imageFolderFragment.setArguments(b);
         ft.replace(containerLayout.getId(), imageFolderFragment);
         ft.addToBackStack(null);
         ft.commit();

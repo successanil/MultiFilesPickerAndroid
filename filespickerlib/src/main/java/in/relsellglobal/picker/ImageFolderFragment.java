@@ -35,6 +35,8 @@ import android.widget.CursorAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.relsellglobal.picker.utils.Constants;
+
 
 public class ImageFolderFragment extends DialogFragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -70,6 +72,8 @@ public class ImageFolderFragment extends DialogFragment implements LoaderManager
         setRetainInstance(true);
         mList.setLayoutManager(new GridLayoutManager((Context) parentMethodsCaller,2));
         mImageFolderCursorListAdapter = new ImageFolderListRecyclerViewAdapter(parentMethodsCaller,list,containerId);
+        int res = getArguments().getInt(Constants.BundleKeys.resForThumbNailLayoutBG);
+        mImageFolderCursorListAdapter.setResForThumbNailLayoutBG(res);
 
         mList.setAdapter(mImageFolderCursorListAdapter);
         getDataFromDB(1);

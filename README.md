@@ -24,7 +24,7 @@ repositories {
 
 dependencies {
     ...
-    compile 'in.relsellglobal.filespickerlib:filespickerlib:0.0.2@aar'
+    compile 'in.relsellglobal.filespickerlib:filespickerlib:0.0.3@aar'
     
    
     compile 'com.android.support:appcompat-v7:26.1.0'       // lib depends on shared lib 

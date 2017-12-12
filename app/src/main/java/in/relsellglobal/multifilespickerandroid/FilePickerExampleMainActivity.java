@@ -6,6 +6,7 @@ package in.relsellglobal.multifilespickerandroid;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -24,6 +25,7 @@ import in.relsellglobal.picker.SpecificFolderImageFragment;
 import in.relsellglobal.picker.utils.Constants;
 
 import static in.relsellglobal.picker.FilePickerConstants.permissionConsts.REQUEST_CODE_ASK_PERMISSIONS;
+import static in.relsellglobal.picker.utils.Constants.BundleKeys.containerBGForInnerImageItems;
 
 
 public class FilePickerExampleMainActivity extends AppCompatActivity implements ParentMethodsCaller {
@@ -35,7 +37,9 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         containerLayout = findViewById(R.id.layoutContaiterWhereyouWantToShowFilesFromDevice);
-        requestPermission();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermission();
+        }
         initProcess();
     }
 
@@ -71,6 +75,7 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
     public void invokeSelectedFolderFragment(Bundle b,int containerId,ParentMethodsCaller parentMethodsCaller) {
 
         SpecificFolderImageFragment sSpecifiFolderImagefragment = new SpecificFolderImageFragment();
+        b.putInt(containerBGForInnerImageItems,R.drawable.ic_launcher_background);
         sSpecifiFolderImagefragment.setArguments(b);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

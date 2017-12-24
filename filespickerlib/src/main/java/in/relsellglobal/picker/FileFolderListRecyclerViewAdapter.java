@@ -8,6 +8,7 @@ package in.relsellglobal.picker;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import in.relsellglobal.picker.pojo.AudioDataFromCursor;
 import in.relsellglobal.picker.pojo.IBean;
+import in.relsellglobal.picker.pojo.ImageDataFromCursor;
 import in.relsellglobal.picker.utils.Utility;
 
 
@@ -48,11 +51,62 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
+        IBean localObject = iBeanList.get(position);
 
-        IBean imageDataFromCursor = iBeanList.get(position);
+        if(localObject instanceof ImageDataFromCursor) {
+
+            holder.imageView.setVisibility(View.VISIBLE);
+
+            ImageDataFromCursor imageDataFromCursor = (ImageDataFromCursor) localObject;
+
+            try {
+                new ImageGetterFromFile(holder.imageView, imageDataFromCursor.getData(), holder.imgBoundView).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            } catch (Exception e) {
+
+            }
 
 
-        /*try {
+            final String bucketName = imageDataFromCursor.getBucket();
+
+            holder.mBucketName.setText(bucketName);
+
+
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle b = new Bundle();
+                    b.putString("bucketname", bucketName);
+                    parentMethodsCaller.invokeSelectedFolderFragment(b, containerId, parentMethodsCaller);
+                }
+            });
+        } else if(localObject instanceof AudioDataFromCursor) {
+            AudioDataFromCursor audioDataFromCursor = (AudioDataFromCursor)localObject;
+
+            holder.imageView.setVisibility(View.GONE);
+
+
+            final String albumName = audioDataFromCursor.getAlbum();
+
+            holder.mBucketName.setText(albumName);
+
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle b = new Bundle();
+                    b.putString("bucketname", albumName);
+                    parentMethodsCaller.invokeSelectedFolderFragment(b, containerId, parentMethodsCaller);
+                }
+            });
+
+        }
+
+
+
+/////////////////////////////////////////////////////////////////////
+        /*IBean imageDataFromCursor = iBeanList.get(position);
+
+
+        try {
             new ImageGetterFromFile(holder.imageView, imageDataFromCursor.getData(), holder.imgBoundView).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } catch (Exception e) {
 

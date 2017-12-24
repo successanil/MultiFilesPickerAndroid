@@ -82,6 +82,7 @@ public class FileFolderFragment extends DialogFragment implements LoaderManager.
         }
 
 
+
         mFileFolderCursorListAdapter = new FileFolderListRecyclerViewAdapter(parentMethodsCaller,list,containerId,queriedFor);
         int res = getArguments().getInt(Constants.BundleKeys.resForThumbNailLayoutBG);
         mFileFolderCursorListAdapter.setResForThumbNailLayoutBG(res);
@@ -119,6 +120,7 @@ public class FileFolderFragment extends DialogFragment implements LoaderManager.
                     IBean.AudioDataConstants.title,
                     IBean.AudioDataConstants.mimeType,
                     IBean.AudioDataConstants.album,
+                    IBean.AudioDataConstants.size,
                     IBean.AudioDataConstants.ringTone,
                     IBean.AudioDataConstants.music,
                     IBean.AudioDataConstants.data});
@@ -187,6 +189,7 @@ public class FileFolderFragment extends DialogFragment implements LoaderManager.
                     audioDataFromCursor.setId(cur.getString(cur.getColumnIndexOrThrow(IBean.AudioDataConstants.audioId)));
                     audioDataFromCursor.setTitle(cur.getString(cur.getColumnIndexOrThrow(IBean.AudioDataConstants.title)));
                     audioDataFromCursor.setMimeType(cur.getString(cur.getColumnIndexOrThrow(IBean.AudioDataConstants.mimeType)));
+                    audioDataFromCursor.setSize(cur.getString(cur.getColumnIndexOrThrow(IBean.AudioDataConstants.size)));
                     audioDataFromCursor.setData(cur.getString(cur.getColumnIndexOrThrow(IBean.AudioDataConstants.data)));
                     list.add(iBean);
 

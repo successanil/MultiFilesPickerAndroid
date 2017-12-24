@@ -33,9 +33,10 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
     private int containerId;
     private int resForThumbNailLayoutBG;
     private int queriedFor;
+    private String TAG = FileFolderListRecyclerViewAdapter.class.getSimpleName();
 
 
-    public FileFolderListRecyclerViewAdapter(ParentMethodsCaller caller, List<IBean> beandListFromCursor, int container,int qF) {
+    public FileFolderListRecyclerViewAdapter(ParentMethodsCaller caller, List<IBean> beandListFromCursor, int container, int qF) {
 
         this.parentMethodsCaller = caller;
         this.iBeanList = beandListFromCursor;
@@ -46,9 +47,8 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.images_folder_listitem, parent, false);
-        return new ViewHolder(view);
+
+        return getDesiredViewHoler(parent, viewType);
     }
 
     @Override
@@ -56,14 +56,16 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
 
         IBean localObject = iBeanList.get(position);
 
-        if(localObject instanceof ImageDataFromCursor) {
+        if (localObject instanceof ImageDataFromCursor) {
 
-            holder.imageView.setVisibility(View.VISIBLE);
+            ImageViewHolder imageViewHolder = (ImageViewHolder) holder;
+
+            imageViewHolder.imageView.setVisibility(View.VISIBLE);
 
             ImageDataFromCursor imageDataFromCursor = (ImageDataFromCursor) localObject;
 
             try {
-                new ImageGetterFromFile(holder.imageView, imageDataFromCursor.getData(), holder.imgBoundView).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                new ImageGetterFromFile(imageViewHolder.imageView, imageDataFromCursor.getData(), imageViewHolder.imgBoundView).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             } catch (Exception e) {
 
             }
@@ -71,40 +73,60 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
 
             final String bucketName = imageDataFromCursor.getBucket();
 
-            holder.mBucketName.setText(bucketName);
+            imageViewHolder.mBucketName.setText(bucketName);
 
 
-            holder.imageView.setOnClickListener(new View.OnClickListener() {
+            imageViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Bundle b = new Bundle();
                     b.putString(Constants.BundleKeys.bucketName, bucketName);
-                    b.putInt(Constants.BundleKeys.queriedFor,queriedFor);
+                    b.putInt(Constants.BundleKeys.queriedFor, queriedFor);
                     parentMethodsCaller.invokeSelectedFolderFragment(b, containerId, parentMethodsCaller);
                 }
             });
-        } else if(localObject instanceof AudioDataFromCursor) {
-            AudioDataFromCursor audioDataFromCursor = (AudioDataFromCursor)localObject;
+        } else if (localObject instanceof AudioDataFromCursor) {
 
-            holder.imageView.setVisibility(View.GONE);
+
+
+            AudioDataFromCursor audioDataFromCursor = (AudioDataFromCursor) localObject;
+
+
+
+            AudioViewHolder audioViewHolder = (AudioViewHolder) holder;
+
+
+
+            try {
+                new ImageGetterFromFile(audioViewHolder.imageView, audioDataFromCursor.getData(), audioViewHolder.imgBoundView).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            } catch (Exception e) {
+
+            }
+
+            audioViewHolder.mFileType.setText(audioDataFromCursor.getMimeType());
+
+            audioViewHolder.mFileSize.setText(audioDataFromCursor.getSize());
+
+
+
+            audioViewHolder.imageView.setVisibility(View.GONE);
 
 
             final String albumName = audioDataFromCursor.getAlbum();
 
-            holder.mBucketName.setText(albumName);
+            audioViewHolder.mBucketName.setText(albumName);
 
-            holder.imageView.setOnClickListener(new View.OnClickListener() {
+            audioViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Bundle b = new Bundle();
                     b.putString(Constants.BundleKeys.bucketName, albumName);
-                    b.putInt(Constants.BundleKeys.queriedFor,queriedFor);
+                    b.putInt(Constants.BundleKeys.queriedFor, queriedFor);
                     parentMethodsCaller.invokeSelectedFolderFragment(b, containerId, parentMethodsCaller);
                 }
             });
 
         }
-
 
 
     }
@@ -127,9 +149,14 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
         protected Bitmap doInBackground(Void... voids) {
 
 
-            Bitmap img = Utility.decodeSampledBitmapFromResource(uriPath, 350, 350);
+            if(uriPath != null) {
 
-            return img;
+                Bitmap img = Utility.decodeSampledBitmapFromResource(uriPath, 350, 350);
+
+                return img;
+            } else {
+                return null;
+            }
         }
 
         @Override
@@ -143,7 +170,9 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
                 imgBoundView.setBackground(((Context) parentMethodsCaller).getResources().getDrawable(R.drawable.common_bg_image_item));
             }
 
-            imageView.setImageBitmap(bitmap);
+            if(bitmap != null) {
+                imageView.setImageBitmap(bitmap);
+            }
 
 
         }
@@ -156,23 +185,52 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View mView;
-        public ImageView imageView;
-        public TextView mBucketName;
-        private LinearLayout imgBoundView;
+        //public ImageView imageView;
+        //public TextView mBucketName;
+        //private LinearLayout imgBoundView;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            imageView = (ImageView) view.findViewById(R.id.imgView);
-            mBucketName = (TextView) view.findViewById(R.id.bkname);
-            imgBoundView = (LinearLayout) view.findViewById(R.id.imgBoundView);
+            //imageView = (ImageView) view.findViewById(R.id.imgView);
+            //mBucketName = (TextView) view.findViewById(R.id.bkname);
+            //imgBoundView = (LinearLayout) view.findViewById(R.id.imgBoundView);
         }
 
 
     }
 
+    public class ImageViewHolder extends ViewHolder {
 
+        public ImageView imageView;
+        public TextView mBucketName;
+        private LinearLayout imgBoundView;
 
+        public ImageViewHolder(View view) {
+            super(view);
+            imageView = (ImageView) view.findViewById(R.id.imgView);
+            mBucketName = (TextView) view.findViewById(R.id.bkname);
+            imgBoundView = (LinearLayout) view.findViewById(R.id.imgBoundView);
+        }
+    }
+
+    public class AudioViewHolder extends ViewHolder {
+
+        public ImageView imageView;
+        public TextView mBucketName;
+        public TextView mFileType;
+        public TextView mFileSize;
+        private LinearLayout imgBoundView;
+
+        public AudioViewHolder(View view) {
+            super(view);
+            imageView = (ImageView) view.findViewById(R.id.imgView);
+            mBucketName = (TextView) view.findViewById(R.id.bkname);
+            mFileType = (TextView) view.findViewById(R.id.fileType);
+            mFileSize = (TextView) view.findViewById(R.id.fileSize);
+            imgBoundView = (LinearLayout) view.findViewById(R.id.imgBoundView);
+        }
+    }
 
 
     public int getResForThumbNailLayoutBG() {
@@ -181,5 +239,39 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
 
     public void setResForThumbNailLayoutBG(int res) {
         this.resForThumbNailLayoutBG = res;
+    }
+
+
+    private ViewHolder getDesiredViewHoler(ViewGroup parent, int viewType) {
+
+        View view;
+
+        switch (viewType) {
+            case Constants.AttachIconKeys.ICON_GALLERY:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.images_folder_listitem, parent, false);
+
+                return new ImageViewHolder(view);
+
+            case Constants.AttachIconKeys.ICON_AUDIO:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.audio_folder_listitem, parent, false);
+
+                return new AudioViewHolder(view);
+
+            default:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.images_folder_listitem, parent, false);
+
+                return new ImageViewHolder(view);
+
+        }
+
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        return queriedFor;
     }
 }

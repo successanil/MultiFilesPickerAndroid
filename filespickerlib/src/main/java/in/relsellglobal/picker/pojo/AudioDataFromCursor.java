@@ -17,9 +17,19 @@ public class AudioDataFromCursor implements IBean{
     private boolean isRingTone;
     private boolean isMusic;
     private String data;
+    private String size;
+
 
     private boolean selected;
 
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 
     public boolean isSelected() {
         return selected;

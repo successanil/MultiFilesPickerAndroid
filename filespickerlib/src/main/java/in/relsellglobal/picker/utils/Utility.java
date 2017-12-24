@@ -6,6 +6,7 @@ package in.relsellglobal.picker.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 /**
  * Created by anilkukreti on 12/12/17.
@@ -51,6 +52,13 @@ public class Utility {
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(filePath, options);
     }
+
+    public static void printLog(String tag,String message) {
+
+        Log.v(tag,message);
+
+    }
+
 
 
 }

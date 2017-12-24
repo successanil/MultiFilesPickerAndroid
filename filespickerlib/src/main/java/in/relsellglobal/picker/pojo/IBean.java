@@ -27,6 +27,7 @@ public interface IBean {
         public static String audioId = MediaStore.Audio.Media._ID;
         public static String title =MediaStore.Audio.Media.TITLE;
         public static String mimeType = MediaStore.Audio.Media.MIME_TYPE;
+        public static String size = MediaStore.Audio.Media.SIZE;
         public static String album = MediaStore.Audio.Media.ALBUM;
         public static String data = MediaStore.Audio.Media.DATA;
         public static String ringTone = MediaStore.Audio.Media.IS_RINGTONE;

@@ -303,6 +303,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/res/layout/audio_folder_listitem.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/filespickerlib/src/main/res/layout/images_folder_listitem.xml">
           <value>
             <set />

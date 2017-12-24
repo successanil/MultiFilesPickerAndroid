@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright (c) 2017. Relsell Global
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="horizontal">
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:layout_weight="2" android:id="@+id/containerFM">
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+    />
+
+    <CheckBox
+        android:id="@+id/cb"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+    />
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:layout_weight="2">
+        <TextView android:id="@+id/fileName" android:layout_centerVertical="true" android:paddingLeft = "20dp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=""/>
+    </RelativeLayout>
+
+
+</LinearLayout>
+

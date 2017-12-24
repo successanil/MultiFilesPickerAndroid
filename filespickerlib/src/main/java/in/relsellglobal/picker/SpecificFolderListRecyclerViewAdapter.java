@@ -25,12 +25,16 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
 import java.util.List;
 
+import in.relsellglobal.picker.pojo.AudioDataFromCursor;
 import in.relsellglobal.picker.pojo.IBean;
+import in.relsellglobal.picker.pojo.ImageDataFromCursor;
+import in.relsellglobal.picker.utils.Constants;
 import in.relsellglobal.picker.utils.Utility;
 
 
@@ -39,24 +43,24 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
     private List<IBean> iBeanList;
     private Context context;
     private int containerBG;
+    private int queriedFor;
 
 
 
 
 
-    public SpecificFolderListRecyclerViewAdapter(Context context, List<IBean> beanListCursor,int containerbg) {
+    public SpecificFolderListRecyclerViewAdapter(Context context, List<IBean> beanListCursor,int containerbg,int qF) {
 
         this.iBeanList = beanListCursor;
         this.context = context;
         this.containerBG = containerbg;
+        this.queriedFor = qF;
 
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.specificfolderimages_listitem, parent, false);
-        return new ViewHolder(view);
+        return getDesiredViewHoler(parent, viewType);
     }
 
     @Override
@@ -65,36 +69,79 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
 
         final IBean iBean = iBeanList.get(position);
 
+        if(iBean instanceof ImageDataFromCursor) {
 
-        File f = new File(iBean.getData());
+            ImageDataFromCursor imageDataFromCursor = (ImageDataFromCursor)iBean;
 
-        holder.frameLayout.setBackground(context.getResources().getDrawable(containerBG));
+            final ImageViewHolder imageViewHolder = (ImageViewHolder)holder;
+
+            File f = new File(iBean.getData());
+
+            imageViewHolder.frameLayout.setBackground(context.getResources().getDrawable(containerBG));
 
 
-        try {
-            new ImageGetterFromFile(holder.imageView, iBean.getData()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        } catch (Exception e) {
+            try {
+                new ImageGetterFromFile(imageViewHolder.imageView, iBean.getData()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            } catch (Exception e) {
+
+            }
+
+            //in some cases, it will prevent unwanted situations
+            imageViewHolder.mCb.setOnCheckedChangeListener(null);
+
+            imageViewHolder.mCb.setChecked(iBean.isSelected());
+
+            imageViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    imageViewHolder.mCb.setChecked(true);
+                }
+            });
+
+            imageViewHolder.mCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    iBean.setSelected(isChecked);
+                }
+            });
+        } else if(iBean instanceof AudioDataFromCursor) {
+
+
+            AudioDataFromCursor audioDataFromCursor = (AudioDataFromCursor)iBean;
+
+            final AudioViewHolder audioViewHolder = (AudioViewHolder)holder;
+
+            File f = new File(audioDataFromCursor.getData());
+
+            audioViewHolder.relativeLayout.setBackground(context.getResources().getDrawable(containerBG));
+
+
+
+            //in some cases, it will prevent unwanted situations
+            audioViewHolder.mCb.setOnCheckedChangeListener(null);
+
+            audioViewHolder.mFileName.setText(audioDataFromCursor.getTitle());
+
+            audioViewHolder.mCb.setChecked(iBean.isSelected());
+
+            audioViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    audioViewHolder.mCb.setChecked(true);
+                }
+            });
+
+            audioViewHolder.mCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    iBean.setSelected(isChecked);
+                }
+            });
+
+
 
         }
 
-        //in some cases, it will prevent unwanted situations
-        holder.mCb.setOnCheckedChangeListener(null);
-
-        holder.mCb.setChecked(iBean.isSelected());
-
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.mCb.setChecked(true);
-            }
-        });
-
-        holder.mCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                iBean.setSelected(isChecked);
-            }
-        });
 
     }
 
@@ -105,12 +152,24 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public View mView;
+
+        public ViewHolder(View view) {
+            super(view);
+            mView = view;
+
+        }
+
+
+    }
+
+    public class ImageViewHolder extends ViewHolder {
+        public View mView;
         public ImageView imageView;
         public TextView mBucketName;
         public CheckBox mCb;
         public FrameLayout frameLayout;
 
-        public ViewHolder(View view) {
+        public ImageViewHolder(View view) {
             super(view);
             mView = view;
             imageView = (ImageView) view.findViewById(R.id.imgView);
@@ -120,6 +179,26 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
 
 
     }
+
+    public class AudioViewHolder extends ViewHolder {
+        public View mView;
+        public ImageView imageView;
+        public TextView mFileName;
+        public CheckBox mCb;
+        public RelativeLayout relativeLayout;
+
+        public AudioViewHolder(View view) {
+            super(view);
+            mView = view;
+            imageView = (ImageView) view.findViewById(R.id.imgView);
+            mCb = (CheckBox)view.findViewById(R.id.cb);
+            mFileName = (TextView)view.findViewById(R.id.fileName);
+            relativeLayout = (RelativeLayout) view.findViewById(R.id.containerFM);
+        }
+
+
+    }
+
 
     private class ImageGetterFromFile extends AsyncTask<Void, Void, Bitmap> {
 
@@ -150,6 +229,39 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
 
 
         }
+    }
+
+    private ViewHolder getDesiredViewHoler(ViewGroup parent, int viewType) {
+
+        View view;
+
+        switch (viewType) {
+            case Constants.AttachIconKeys.ICON_GALLERY:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.specificfolderimages_listitem, parent, false);
+
+                return new ImageViewHolder(view);
+
+            case Constants.AttachIconKeys.ICON_AUDIO:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.specificfolderaudio_listitem, parent, false);
+
+                return new AudioViewHolder(view);
+
+            default:
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.specificfolderimages_listitem, parent, false);
+
+                return new ImageViewHolder(view);
+
+        }
+
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        return queriedFor;
     }
 
 

@@ -87,7 +87,7 @@ public class SpecificFolderFragment extends Fragment implements LoaderManager.Lo
         Bundle b = getArguments();
         mImageAList = new ArrayList<LinearLayout>();
         mImageSrcList = new ArrayList<String>();
-        mFolderToGoDeeperIn = (String) b.get("bucketname");
+        mFolderToGoDeeperIn = (String) b.get(Constants.BundleKeys.bucketName);
 
     }
 
@@ -134,7 +134,7 @@ public class SpecificFolderFragment extends Fragment implements LoaderManager.Lo
         }
 
 
-        mSpecificFolderImageCursorListAdapter = new SpecificFolderListRecyclerViewAdapter(getActivity(), iBeans, i);
+        mSpecificFolderImageCursorListAdapter = new SpecificFolderListRecyclerViewAdapter(getActivity(), iBeans, i,queriedFor);
 
         recyclerView.setAdapter(mSpecificFolderImageCursorListAdapter);
 

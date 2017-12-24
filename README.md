@@ -1,6 +1,8 @@
 # MultiFilesPickerAndroid
 MultiFilesPickerForAndroid , right now lib supports only picking up images but soon support for other types of files will be added. 
 
+[See Demo](http://www.relsellglobal.in)
+
 
 
 
@@ -18,15 +20,15 @@ repositories {
     maven {
         url "https://dl.bintray.com/successanil/MultiFilesPickerLibForAndroid"
     }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+   
 }
 
 
 dependencies {
     ...
-    compile 'in.relsellglobal.filespickerlib:filespickerlib:0.0.2@aar'
+    compile 'in.relsellglobal.filespickerlib:filespickerlib:0.0.3@aar'
     
-    compile 'com.squareup.picasso:picasso:2.6.0-SNAPSHOT'   // lib depends on shared lib
+   
     compile 'com.android.support:appcompat-v7:26.1.0'       // lib depends on shared lib 
     compile 'com.android.support:recyclerview-v7:26.1.0'    // lib depends on shared lib
 }
@@ -224,6 +226,13 @@ Limitations
 
 Changelog
 ---------
+
+
+* **0.0.3**
+    * Removed picasso lib dependency
+    * Added minor screen transitions
+    * Added method to set Background drawables as per need for Thumbnail Image Items. 
+
 
 * **0.0.2**
     * Initial release

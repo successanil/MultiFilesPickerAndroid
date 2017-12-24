@@ -32,6 +32,7 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
     private List<IBean> iBeanList;
     private int containerId;
     private int resForThumbNailLayoutBG;
+    private int resForThumbNailLayoutFG;
     private int queriedFor;
     private String TAG = FileFolderListRecyclerViewAdapter.class.getSimpleName();
 
@@ -88,13 +89,12 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
         } else if (localObject instanceof AudioDataFromCursor) {
 
 
-
             AudioDataFromCursor audioDataFromCursor = (AudioDataFromCursor) localObject;
-
 
 
             AudioViewHolder audioViewHolder = (AudioViewHolder) holder;
 
+            Utility.printLog(TAG,"data "+audioDataFromCursor.getData());
 
 
             try {
@@ -108,8 +108,6 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
             audioViewHolder.mFileSize.setText(audioDataFromCursor.getSize());
 
 
-
-            audioViewHolder.imageView.setVisibility(View.GONE);
 
 
             final String albumName = audioDataFromCursor.getAlbum();
@@ -131,6 +129,12 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
 
     }
 
+    public void setResForThumbNailLayoutFG(int res) {
+
+        this.resForThumbNailLayoutFG = res;
+
+    }
+
     private class ImageGetterFromFile extends AsyncTask<Void, Void, Bitmap> {
 
 
@@ -149,7 +153,7 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
         protected Bitmap doInBackground(Void... voids) {
 
 
-            if(uriPath != null) {
+            if (queriedFor == Constants.AttachIconKeys.ICON_GALLERY) {
 
                 Bitmap img = Utility.decodeSampledBitmapFromResource(uriPath, 350, 350);
 
@@ -170,8 +174,10 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
                 imgBoundView.setBackground(((Context) parentMethodsCaller).getResources().getDrawable(R.drawable.common_bg_image_item));
             }
 
-            if(bitmap != null) {
+            if (bitmap != null) {
                 imageView.setImageBitmap(bitmap);
+            } else {
+                imageView.setImageDrawable(((Context) parentMethodsCaller).getResources().getDrawable(resForThumbNailLayoutFG));
             }
 
 

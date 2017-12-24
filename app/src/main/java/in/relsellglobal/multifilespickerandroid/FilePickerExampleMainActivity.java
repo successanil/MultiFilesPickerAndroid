@@ -66,7 +66,7 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
         ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
         fileFolderFragment.setParentCaller(FilePickerExampleMainActivity.this);
         fileFolderFragment.setContainerId(containerLayout.getId());
-        b.putInt(Constants.BundleKeys.resForThumbNailLayoutBG, R.drawable.ic_launcher_background);
+
         fileFolderFragment.setArguments(b);
         ft.replace(containerLayout.getId(), fileFolderFragment);
         ft.addToBackStack(null);
@@ -142,21 +142,26 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
     }
 
 
-    public void startGetFilesProcess(int var) {
+    public void startGetFilesProcess(Bundle b) {
 
-        Bundle b = new Bundle();
-        b.putInt(Constants.BundleKeys.queriedFor, var);
         initProcess(b);
     }
 
     public void startToGetImageFiles() {
         // start process to get file
-        startGetFilesProcess(Constants.AttachIconKeys.ICON_GALLERY);
+        Bundle b = new Bundle();
+        b.putInt(Constants.BundleKeys.queriedFor, Constants.AttachIconKeys.ICON_GALLERY);
+        b.putInt(Constants.BundleKeys.resForThumbNailLayoutBG, R.drawable.ic_launcher_background);
+        startGetFilesProcess(b);
     }
 
     public void startToGetAudioFiles() {
         // start process to get file
-        startGetFilesProcess(Constants.AttachIconKeys.ICON_AUDIO);
+        Bundle b = new Bundle();
+        b.putInt(Constants.BundleKeys.queriedFor, Constants.AttachIconKeys.ICON_AUDIO);
+        b.putInt(Constants.BundleKeys.resForThumbNailLayoutBG, R.drawable.ic_launcher_background);
+        b.putInt(Constants.BundleKeys.resForThumbNailLayoutFG, R.mipmap.audio);
+        startGetFilesProcess(b);
     }
 
 

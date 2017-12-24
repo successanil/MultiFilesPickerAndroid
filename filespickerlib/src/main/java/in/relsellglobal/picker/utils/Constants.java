@@ -11,6 +11,7 @@ package in.relsellglobal.picker.utils;
 public class Constants {
     public interface  BundleKeys {
         String resForThumbNailLayoutBG = "resForThumbNailLayoutBG";
+        String resForThumbNailLayoutFG = "resForThumbNailLayoutFG";
         String containerBGForInnerImageItems = "containerBGForInnerImageItems";
         String queriedFor = "queriedFor";
         String bucketName = "bucketName";

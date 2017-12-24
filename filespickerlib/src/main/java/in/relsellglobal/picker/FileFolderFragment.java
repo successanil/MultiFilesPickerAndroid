@@ -84,8 +84,11 @@ public class FileFolderFragment extends DialogFragment implements LoaderManager.
 
 
         mFileFolderCursorListAdapter = new FileFolderListRecyclerViewAdapter(parentMethodsCaller,list,containerId,queriedFor);
-        int res = getArguments().getInt(Constants.BundleKeys.resForThumbNailLayoutBG);
-        mFileFolderCursorListAdapter.setResForThumbNailLayoutBG(res);
+        int resBG = getArguments().getInt(Constants.BundleKeys.resForThumbNailLayoutBG);
+        mFileFolderCursorListAdapter.setResForThumbNailLayoutBG(resBG);
+        
+        int resFG = getArguments().getInt(Constants.BundleKeys.resForThumbNailLayoutFG);
+        mFileFolderCursorListAdapter.setResForThumbNailLayoutFG(resFG);
 
         mList.setAdapter(mFileFolderCursorListAdapter);
         getDataFromDB(1);

@@ -12,5 +12,16 @@ public class Constants {
     public interface  BundleKeys {
         String resForThumbNailLayoutBG = "resForThumbNailLayoutBG";
         String containerBGForInnerImageItems = "containerBGForInnerImageItems";
+        String queriedFor = "queriedFor";
     }
+
+    public interface  AttachIconKeys {
+        int ICON_AUDIO  = 3;
+        int ICON_CAMERA  = 1;
+        int ICON_DOCUMENT  = 0;
+        int ICON_GALLERY = 2;
+        int ICON_CONTACT = 5;
+        int ICON_LOCATION = 4;
+    }
+
 }

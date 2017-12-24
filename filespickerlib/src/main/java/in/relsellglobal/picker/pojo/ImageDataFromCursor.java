@@ -6,24 +6,12 @@
  * Copyright (c) 2017. Relsell Global
  */
 
-/*
- * Copyright (c) 2017. Relsell Global
- */
-
-/*
- * Copyright (c) 2017. Relsell Global
- */
-
-/*
- * Copyright (c) 2017. Relsell Global
- */
-
-package in.relsellglobal.picker;
+package in.relsellglobal.picker.pojo;
 
 /**
  * Created by anilkukreti on 17/11/17.
  */
-public class ImageDataFromCursor {
+public class ImageDataFromCursor implements IBean {
     private String bucket;
     private String date;
     private String data;
@@ -69,5 +57,16 @@ public class ImageDataFromCursor {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "ImageDataFromCursor{" +
+                "bucket='" + bucket + '\'' +
+                ", date='" + date + '\'' +
+                ", data='" + data + '\'' +
+                ", orientation='" + orientation + '\'' +
+                ", isSelected=" + isSelected +
+                '}';
     }
 }

@@ -19,12 +19,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.relsellglobal.picker.ImageFolderFragment;
+import in.relsellglobal.picker.FileFolderFragment;
 import in.relsellglobal.picker.ParentMethodsCaller;
-import in.relsellglobal.picker.SpecificFolderImageFragment;
+import in.relsellglobal.picker.SpecificFolderFragment;
+import in.relsellglobal.picker.pojo.IBean;
 import in.relsellglobal.picker.utils.Constants;
 
-import static in.relsellglobal.picker.FilePickerConstants.permissionConsts.REQUEST_CODE_ASK_PERMISSIONS;
+import static in.relsellglobal.multifilespickerandroid.FilePickerConstants.permissionConsts.REQUEST_CODE_ASK_PERMISSIONS;
 import static in.relsellglobal.picker.utils.Constants.BundleKeys.containerBGForInnerImageItems;
 
 
@@ -37,16 +38,17 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         containerLayout = findViewById(R.id.layoutContaiterWhereyouWantToShowFilesFromDevice);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermission();
         }
-        initProcess();
+        startToGetImageFiles();
     }
 
     private void requestPermission() {
 
         final List<String> requiredSDKPermissions = new ArrayList<String>();
         requiredSDKPermissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        requiredSDKPermissions.add(Manifest.permission.RECORD_AUDIO);
 
         ActivityCompat.requestPermissions(this,
                 requiredSDKPermissions.toArray(new String[requiredSDKPermissions.size()]),
@@ -54,28 +56,27 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
     }
 
 
-    public void initProcess() {
+    public void initProcess(Bundle b) {
 
-        ImageFolderFragment imageFolderFragment = new ImageFolderFragment();
+        FileFolderFragment fileFolderFragment = new FileFolderFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        imageFolderFragment.setParentCaller(FilePickerExampleMainActivity.this);
-        imageFolderFragment.setContainerId(containerLayout.getId());
-        Bundle b = new Bundle();
-        b.putInt(Constants.BundleKeys.resForThumbNailLayoutBG,R.drawable.ic_launcher_background);
-        imageFolderFragment.setArguments(b);
-        ft.replace(containerLayout.getId(), imageFolderFragment);
+        fileFolderFragment.setParentCaller(FilePickerExampleMainActivity.this);
+        fileFolderFragment.setContainerId(containerLayout.getId());
+        b.putInt(Constants.BundleKeys.resForThumbNailLayoutBG, R.drawable.ic_launcher_background);
+        fileFolderFragment.setArguments(b);
+        ft.replace(containerLayout.getId(), fileFolderFragment);
         ft.addToBackStack(null);
         ft.commit();
 
     }
 
     @Override
-    public void invokeSelectedFolderFragment(Bundle b,int containerId,ParentMethodsCaller parentMethodsCaller) {
+    public void invokeSelectedFolderFragment(Bundle b, int containerId, ParentMethodsCaller parentMethodsCaller) {
 
-        SpecificFolderImageFragment sSpecifiFolderImagefragment = new SpecificFolderImageFragment();
-        b.putInt(containerBGForInnerImageItems,R.drawable.ic_launcher_background);
+        SpecificFolderFragment sSpecifiFolderImagefragment = new SpecificFolderFragment();
+        b.putInt(containerBGForInnerImageItems, R.drawable.ic_launcher_background);
         sSpecifiFolderImagefragment.setArguments(b);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -88,10 +89,14 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
 
     }
 
-    @Override
-    public void invokePicCollageImageShow(List<String> uris) {
 
-        // here in uris you will get uris of all the selected files (Right now images)
+
+    @Override
+    public void selectedFilesSendToCaller(List<IBean> fileList) {
+
+        // now do what you want to do
+
+
 
     }
 
@@ -131,5 +136,35 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
+
+    public void startGetFilesProcess(int var) {
+
+        Bundle b = new Bundle();
+        b.putInt(Constants.BundleKeys.queriedFor, var);
+
+        switch (var) {
+            case Constants.AttachIconKeys.ICON_GALLERY:
+            case Constants.AttachIconKeys.ICON_DOCUMENT:
+            case Constants.AttachIconKeys.ICON_CONTACT:
+
+                initProcess(b);
+            break;
+
+        }
+
+
+    }
+
+    public void startToGetImageFiles() {
+        // start process to get file
+        startGetFilesProcess(Constants.AttachIconKeys.ICON_GALLERY);
+    }
+
+    public void startToGetAudioFiles() {
+        // start process to get file
+        startGetFilesProcess(Constants.AttachIconKeys.ICON_AUDIO);
+    }
+
 
 }

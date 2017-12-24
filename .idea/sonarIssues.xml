@@ -48,6 +48,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/in/relsellglobal/multifilespickerandroid/FilePickerConstants.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/in/relsellglobal/multifilespickerandroid/FilePickerExampleMainActivity.java">
           <value>
             <set />
@@ -173,6 +178,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/FileFolderFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/FileFolderListRecyclerViewAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/FilePickerConstants.java">
           <value>
             <set />
@@ -198,12 +213,77 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/SpecificFolderFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/SpecificFolderImageFragment.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/SpecificFolderListRecyclerViewAdapter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/pojo/AudioDataFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/pojo/ContactDataFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/pojo/DummyTextFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/pojo/FileDataFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/pojo/IBean.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/pojo/ImageDataFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/returnedvalues/AudioDataFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/returnedvalues/ContactDataFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/returnedvalues/DummyTextFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/returnedvalues/FileDataFromCursor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/returnedvalues/IBean.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/filespickerlib/src/main/java/in/relsellglobal/picker/returnedvalues/ImageDataFromCursor.java">
           <value>
             <set />
           </value>

@@ -8,7 +8,6 @@ package in.relsellglobal.picker;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,21 +18,22 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import in.relsellglobal.picker.pojo.IBean;
 import in.relsellglobal.picker.utils.Utility;
 
 
-public class ImageFolderListRecyclerViewAdapter extends RecyclerView.Adapter<ImageFolderListRecyclerViewAdapter.ViewHolder> {
+public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<FileFolderListRecyclerViewAdapter.ViewHolder> {
 
     private ParentMethodsCaller parentMethodsCaller;
-    private List<ImageDataFromCursor> imageDataFromCursorList;
+    private List<IBean> iBeanList;
     private int containerId;
     private int resForThumbNailLayoutBG;
 
 
-    public ImageFolderListRecyclerViewAdapter(ParentMethodsCaller caller, List<ImageDataFromCursor> imageDataFromCursors, int container) {
+    public FileFolderListRecyclerViewAdapter(ParentMethodsCaller caller, List<IBean> beandListFromCursor, int container) {
 
         this.parentMethodsCaller = caller;
-        this.imageDataFromCursorList = imageDataFromCursors;
+        this.iBeanList = beandListFromCursor;
         this.containerId = container;
 
     }
@@ -49,10 +49,10 @@ public class ImageFolderListRecyclerViewAdapter extends RecyclerView.Adapter<Ima
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
 
-        ImageDataFromCursor imageDataFromCursor = imageDataFromCursorList.get(position);
+        IBean imageDataFromCursor = iBeanList.get(position);
 
 
-        try {
+        /*try {
             new ImageGetterFromFile(holder.imageView, imageDataFromCursor.getData(), holder.imgBoundView).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } catch (Exception e) {
 
@@ -72,7 +72,9 @@ public class ImageFolderListRecyclerViewAdapter extends RecyclerView.Adapter<Ima
                 b.putString("bucketname", bucketName);
                 parentMethodsCaller.invokeSelectedFolderFragment(b, containerId, parentMethodsCaller);
             }
-        });
+        });*/
+
+
     }
 
     private class ImageGetterFromFile extends AsyncTask<Void, Void, Bitmap> {
@@ -117,7 +119,7 @@ public class ImageFolderListRecyclerViewAdapter extends RecyclerView.Adapter<Ima
 
     @Override
     public int getItemCount() {
-        return imageDataFromCursorList != null ? imageDataFromCursorList.size() : 0;
+        return iBeanList != null ? iBeanList.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

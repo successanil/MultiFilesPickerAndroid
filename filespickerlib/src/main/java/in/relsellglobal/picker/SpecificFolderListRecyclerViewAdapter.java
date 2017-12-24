@@ -30,12 +30,13 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.List;
 
+import in.relsellglobal.picker.pojo.IBean;
 import in.relsellglobal.picker.utils.Utility;
 
 
 public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<SpecificFolderListRecyclerViewAdapter.ViewHolder> {
 
-    private List<ImageDataFromCursor> imageDataFromCursorList;
+    private List<IBean> iBeanList;
     private Context context;
     private int containerBG;
 
@@ -43,9 +44,9 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
 
 
 
-    public SpecificFolderListRecyclerViewAdapter(Context context, List<ImageDataFromCursor> imageDataFromCursors,int containerbg) {
+    public SpecificFolderListRecyclerViewAdapter(Context context, List<IBean> beanListCursor,int containerbg) {
 
-        this.imageDataFromCursorList = imageDataFromCursors;
+        this.iBeanList = beanListCursor;
         this.context = context;
         this.containerBG = containerbg;
 
@@ -62,16 +63,16 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
 
-        final ImageDataFromCursor imageDataFromCursor = imageDataFromCursorList.get(position);
+        final IBean iBean = iBeanList.get(position);
 
 
-        File f = new File(imageDataFromCursor.getData());
+        File f = new File(iBean.getData());
 
         holder.frameLayout.setBackground(context.getResources().getDrawable(containerBG));
 
 
         try {
-            new ImageGetterFromFile(holder.imageView, imageDataFromCursor.getData()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            new ImageGetterFromFile(holder.imageView, iBean.getData()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } catch (Exception e) {
 
         }
@@ -79,7 +80,7 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
         //in some cases, it will prevent unwanted situations
         holder.mCb.setOnCheckedChangeListener(null);
 
-        holder.mCb.setChecked(imageDataFromCursor.isSelected());
+        holder.mCb.setChecked(iBean.isSelected());
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +92,7 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
         holder.mCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                imageDataFromCursor.setSelected(isChecked);
+                iBean.setSelected(isChecked);
             }
         });
 
@@ -99,7 +100,7 @@ public class SpecificFolderListRecyclerViewAdapter extends RecyclerView.Adapter<
 
     @Override
     public int getItemCount() {
-        return imageDataFromCursorList != null ? imageDataFromCursorList.size() : 0;
+        return iBeanList != null ? iBeanList.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

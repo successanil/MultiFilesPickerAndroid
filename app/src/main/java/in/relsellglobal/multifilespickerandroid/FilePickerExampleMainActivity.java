@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -41,7 +42,8 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermission();
         }
-        startToGetImageFiles();
+        //startToGetImageFiles();
+        startToGetAudioFiles();
     }
 
     private void requestPermission() {
@@ -96,6 +98,8 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
 
         // now do what you want to do
 
+        Log.v("TAG","These are selected Files "+fileList);
+
 
 
     }
@@ -142,18 +146,7 @@ public class FilePickerExampleMainActivity extends AppCompatActivity implements 
 
         Bundle b = new Bundle();
         b.putInt(Constants.BundleKeys.queriedFor, var);
-
-        switch (var) {
-            case Constants.AttachIconKeys.ICON_GALLERY:
-            case Constants.AttachIconKeys.ICON_DOCUMENT:
-            case Constants.AttachIconKeys.ICON_CONTACT:
-
-                initProcess(b);
-            break;
-
-        }
-
-
+        initProcess(b);
     }
 
     public void startToGetImageFiles() {

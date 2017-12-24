@@ -113,16 +113,23 @@ public class SpecificFolderFragment extends Fragment implements LoaderManager.Lo
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        int i = getArguments().getInt(Constants.BundleKeys.containerBGForInnerImageItems);
+        Bundle b = getArguments();
+
+        int i = b.getInt(Constants.BundleKeys.containerBGForInnerImageItems);
 
 
-        if (queriedFor == Constants.AttachIconKeys.ICON_DOCUMENT) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        } else if (queriedFor == Constants.AttachIconKeys.ICON_GALLERY) {
+        queriedFor = b.getInt(Constants.BundleKeys.queriedFor);
+
+        if(queriedFor == Constants.AttachIconKeys.ICON_GALLERY) {
+            mFolderToGoDeeperIn = b.getString(Constants.BundleKeys.bucketName);
+        } else if(queriedFor == Constants.AttachIconKeys.ICON_AUDIO) {
+            mFolderToGoDeeperIn = b.getString(Constants.BundleKeys.bucketName);
+        }
+
+
+        if (queriedFor == Constants.AttachIconKeys.ICON_GALLERY) {
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         } else if (queriedFor == Constants.AttachIconKeys.ICON_AUDIO) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        } else if (queriedFor == Constants.AttachIconKeys.ICON_CONTACT) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
 
@@ -171,18 +178,18 @@ public class SpecificFolderFragment extends Fragment implements LoaderManager.Lo
 
         Bundle b = new Bundle();
         if (queriedFor == Constants.AttachIconKeys.ICON_GALLERY) {
-            b.putStringArray("projection", new String[]{
+            b.putStringArray(Constants.BundleKeys.projection, new String[]{
                     IBean.ImageDataConstants.imageId,
                     IBean.ImageDataConstants.bucketId,
                     IBean.ImageDataConstants.bucketDisplayName,
                     IBean.ImageDataConstants.dateTaken,
                     IBean.ImageDataConstants.orientation,
                     IBean.ImageDataConstants.data});
-            b.putString("selection", IBean.ImageDataConstants.bucketDisplayName + "=?");
-            b.putStringArray("selectionArgs", new String[]{bucketName});
-            b.putString("sortOrder", IBean.ImageDataConstants.dateTaken + " DESC");
+            b.putString(Constants.BundleKeys.selection, IBean.ImageDataConstants.bucketDisplayName + "=?");
+            b.putStringArray(Constants.BundleKeys.selectionArgs, new String[]{bucketName});
+            b.putString(Constants.BundleKeys.sortOrder, IBean.ImageDataConstants.dateTaken + " DESC");
         } else if (queriedFor == Constants.AttachIconKeys.ICON_AUDIO) {
-            b.putStringArray("projection", new String[]{
+            b.putStringArray(Constants.BundleKeys.projection, new String[]{
                     IBean.AudioDataConstants.audioId,
                     IBean.AudioDataConstants.title,
                     IBean.AudioDataConstants.mimeType,
@@ -190,9 +197,9 @@ public class SpecificFolderFragment extends Fragment implements LoaderManager.Lo
                     IBean.AudioDataConstants.ringTone,
                     IBean.AudioDataConstants.music,
                     IBean.AudioDataConstants.data});
-            b.putString("selection", IBean.AudioDataConstants.album + "=?");
-            b.putStringArray("selectionArgs", new String[]{bucketName});
-            b.putString("sortOrder", null);
+            b.putString(Constants.BundleKeys.selection, IBean.AudioDataConstants.album + "=?");
+            b.putStringArray(Constants.BundleKeys.selectionArgs, new String[]{bucketName});
+            b.putString(Constants.BundleKeys.sortOrder, null);
         }
         Loader local = getLoaderManager().initLoader(queryNo, b, this);
     }
@@ -212,17 +219,17 @@ public class SpecificFolderFragment extends Fragment implements LoaderManager.Lo
 
         if (queriedFor == Constants.AttachIconKeys.ICON_GALLERY) {
             Uri CONTENT_URI = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-            String[] projection = args.getStringArray("projection");
-            String selection = args.getString("selection");
-            String[] selectionArgs = args.getStringArray("selectionArgs");
-            String sortOrder = args.getString("sortOrder");
+            String[] projection = args.getStringArray(Constants.BundleKeys.projection);
+            String selection = args.getString(Constants.BundleKeys.selection);
+            String[] selectionArgs = args.getStringArray(Constants.BundleKeys.selectionArgs);
+            String sortOrder = args.getString(Constants.BundleKeys.sortOrder);
             cursorLoader = new CursorLoader(getActivity(), CONTENT_URI, projection, selection, selectionArgs, sortOrder);
         } else if (queriedFor == Constants.AttachIconKeys.ICON_AUDIO) {
             Uri CONTENT_URI = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-            String[] projection = args.getStringArray("projection");
-            String selection = args.getString("selection");
-            String[] selectionArgs = args.getStringArray("selectionArgs");
-            String sortOrder = args.getString("sortOrder");
+            String[] projection = args.getStringArray(Constants.BundleKeys.projection);
+            String selection = args.getString(Constants.BundleKeys.selection);
+            String[] selectionArgs = args.getStringArray(Constants.BundleKeys.selectionArgs);
+            String sortOrder = args.getString(Constants.BundleKeys.sortOrder);
             cursorLoader = new CursorLoader(getActivity(), CONTENT_URI, projection, selection, selectionArgs, sortOrder);
         }
 

@@ -13,6 +13,11 @@ public class Constants {
         String resForThumbNailLayoutBG = "resForThumbNailLayoutBG";
         String containerBGForInnerImageItems = "containerBGForInnerImageItems";
         String queriedFor = "queriedFor";
+        String bucketName = "bucketName";
+        String projection = "projection";
+        String selection = "selection";
+        String selectionArgs = "selectionArgs";
+        String sortOrder = "sortOrder";
     }
 
     public interface  AttachIconKeys {

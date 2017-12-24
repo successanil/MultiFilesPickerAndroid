@@ -14,7 +14,6 @@
 
 package in.relsellglobal.picker;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -83,8 +82,7 @@ public class FileFolderFragment extends DialogFragment implements LoaderManager.
         }
 
 
-        mList.setLayoutManager(new GridLayoutManager((Context) parentMethodsCaller,2));
-        mFileFolderCursorListAdapter = new FileFolderListRecyclerViewAdapter(parentMethodsCaller,list,containerId);
+        mFileFolderCursorListAdapter = new FileFolderListRecyclerViewAdapter(parentMethodsCaller,list,containerId,queriedFor);
         int res = getArguments().getInt(Constants.BundleKeys.resForThumbNailLayoutBG);
         mFileFolderCursorListAdapter.setResForThumbNailLayoutBG(res);
 
@@ -105,18 +103,18 @@ public class FileFolderFragment extends DialogFragment implements LoaderManager.
         Bundle b = new Bundle();
 
         if (queriedFor == Constants.AttachIconKeys.ICON_GALLERY) {
-            b.putStringArray("projection", new String[]{
+            b.putStringArray(Constants.BundleKeys.projection, new String[]{
                     IBean.ImageDataConstants.imageId,
                     IBean.ImageDataConstants.bucketId,
                     IBean.ImageDataConstants.bucketDisplayName,
                     IBean.ImageDataConstants.dateTaken,
                     IBean.ImageDataConstants.orientation,
                     IBean.ImageDataConstants.data});
-            b.putString("selection", "1=1) GROUP BY (" + IBean.ImageDataConstants.bucketDisplayName);
-            b.putStringArray("selectionArgs", null);
-            b.putString("sortOrder", null);
+            b.putString(Constants.BundleKeys.selection, "1=1) GROUP BY (" + IBean.ImageDataConstants.bucketDisplayName);
+            b.putStringArray(Constants.BundleKeys.selectionArgs, null);
+            b.putString(Constants.BundleKeys.sortOrder, null);
         } else if (queriedFor == Constants.AttachIconKeys.ICON_AUDIO) {
-            b.putStringArray("projection", new String[]{
+            b.putStringArray(Constants.BundleKeys.projection, new String[]{
                     IBean.AudioDataConstants.audioId,
                     IBean.AudioDataConstants.title,
                     IBean.AudioDataConstants.mimeType,
@@ -124,9 +122,9 @@ public class FileFolderFragment extends DialogFragment implements LoaderManager.
                     IBean.AudioDataConstants.ringTone,
                     IBean.AudioDataConstants.music,
                     IBean.AudioDataConstants.data});
-            b.putString("selection", "1=1) GROUP BY (" + IBean.AudioDataConstants.album);
-            b.putStringArray("selectionArgs", null);
-            b.putString("sortOrder", null);
+            b.putString(Constants.BundleKeys.selection, "1=1) GROUP BY (" + IBean.AudioDataConstants.album);
+            b.putStringArray(Constants.BundleKeys.selectionArgs, null);
+            b.putString(Constants.BundleKeys.sortOrder, null);
         }
 
         Loader local = getLoaderManager().initLoader(queryNo, b, this);

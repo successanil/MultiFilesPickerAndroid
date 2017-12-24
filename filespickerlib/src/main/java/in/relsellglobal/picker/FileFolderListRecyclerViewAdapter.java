@@ -22,6 +22,7 @@ import java.util.List;
 import in.relsellglobal.picker.pojo.AudioDataFromCursor;
 import in.relsellglobal.picker.pojo.IBean;
 import in.relsellglobal.picker.pojo.ImageDataFromCursor;
+import in.relsellglobal.picker.utils.Constants;
 import in.relsellglobal.picker.utils.Utility;
 
 
@@ -31,13 +32,15 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
     private List<IBean> iBeanList;
     private int containerId;
     private int resForThumbNailLayoutBG;
+    private int queriedFor;
 
 
-    public FileFolderListRecyclerViewAdapter(ParentMethodsCaller caller, List<IBean> beandListFromCursor, int container) {
+    public FileFolderListRecyclerViewAdapter(ParentMethodsCaller caller, List<IBean> beandListFromCursor, int container,int qF) {
 
         this.parentMethodsCaller = caller;
         this.iBeanList = beandListFromCursor;
         this.containerId = container;
+        this.queriedFor = qF;
 
     }
 
@@ -75,7 +78,8 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
                 @Override
                 public void onClick(View v) {
                     Bundle b = new Bundle();
-                    b.putString("bucketname", bucketName);
+                    b.putString(Constants.BundleKeys.bucketName, bucketName);
+                    b.putInt(Constants.BundleKeys.queriedFor,queriedFor);
                     parentMethodsCaller.invokeSelectedFolderFragment(b, containerId, parentMethodsCaller);
                 }
             });
@@ -93,40 +97,14 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
                 @Override
                 public void onClick(View v) {
                     Bundle b = new Bundle();
-                    b.putString("bucketname", albumName);
+                    b.putString(Constants.BundleKeys.bucketName, albumName);
+                    b.putInt(Constants.BundleKeys.queriedFor,queriedFor);
                     parentMethodsCaller.invokeSelectedFolderFragment(b, containerId, parentMethodsCaller);
                 }
             });
 
         }
 
-
-
-/////////////////////////////////////////////////////////////////////
-        /*IBean imageDataFromCursor = iBeanList.get(position);
-
-
-        try {
-            new ImageGetterFromFile(holder.imageView, imageDataFromCursor.getData(), holder.imgBoundView).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        } catch (Exception e) {
-
-        }
-
-
-        final String bucketName = imageDataFromCursor.getBucket();
-
-        holder.mBucketName.setText(bucketName);
-
-
-        holder.imageView.setClickable(true);
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle b = new Bundle();
-                b.putString("bucketname", bucketName);
-                parentMethodsCaller.invokeSelectedFolderFragment(b, containerId, parentMethodsCaller);
-            }
-        });*/
 
 
     }
@@ -192,6 +170,9 @@ public class FileFolderListRecyclerViewAdapter extends RecyclerView.Adapter<File
 
 
     }
+
+
+
 
 
     public int getResForThumbNailLayoutBG() {
